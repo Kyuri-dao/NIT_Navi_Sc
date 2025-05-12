@@ -33,19 +33,18 @@ for i in range(5):
         get_news_infos = soup.select('div.news_info')
         get_news_items = soup.select('div.news_title')
 
-        for item in get_news_items:
+        for info, item in zip(get_news_infos, get_news_items):
             #itemからtextを絞り込み->エスケープシーケンスや全角空白を取り除く.
+            infos = info.get_text().replace('\t', '').replace('\n', '').replace('　', ' ').strip()
             items = item.get_text().replace('\t', '').replace('\n', '').replace('　', ' ').strip()
 
-            for info in get_news_infos:
-                infos = info.get_text().replace('\t', '').replace('\n', '').replace('　', ' ').strip()
-            
             dic = {
                 'news_date': infos,
                 'news_name': items
             }
 
             news_list.append(dic)
+
 
         print('i == 0分岐処理終了')
 
@@ -58,11 +57,9 @@ for i in range(5):
         get_news_infos = soup.select('div.news_info')
         get_news_items = soup.select('div.news_title')
 
-        for item in get_news_items:
+        for info, item in zip(get_news_infos, get_news_items):
+            infos = info.get_text().replace('\t', '').replace('\n', '').replace('　', ' ').strip()
             items = item.get_text().replace('\t', '').replace('\n', '').replace('　', ' ').strip()
-
-            for info in get_news_infos:
-                infos = info.get_text().replace('\t', '').replace('\n', '').replace('　', ' ').strip()
 
             dic = {
                 'news_date': infos,
